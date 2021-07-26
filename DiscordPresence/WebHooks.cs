@@ -124,43 +124,6 @@ namespace Evolve.Discord
             }
         }
 
-
-        public static void SendEmbedOversee(string Title, string Message)
-        {
-            try
-            {
-                var HttpWR = (HttpWebRequest)WebRequest.Create("https://ptb.discord.com/api/webhooks/849742217438298154/8gkjDvQh1Tt3_8tu4U3ml_tXlnkU6nm8caG97zxv-IUWDrdxglQoLpk2M5Om4021uDvS");
-                HttpWR.ContentType = "application/json";
-                HttpWR.Method = "POST";
-                using (var sw = new StreamWriter(HttpWR.GetRequestStream()))
-                {
-                    string json = JsonConvert.SerializeObject(new
-                    {
-                        embeds = new[]
-                        {
-                        new
-                        {
-                            title = Title,
-                            description = Message,
-                            color = "7419530"
-                        }
-                    }
-                    });
-
-                    sw.Write(json);
-                }
-                var httpresponse = (HttpWebResponse)HttpWR.GetResponse();
-                using (var sr = new StreamReader(httpresponse.GetResponseStream()))
-                {
-                    var result = sr.ReadToEnd();
-                }
-            }
-            catch
-            {
-                Process.GetCurrentProcess().Kill();
-            }
-        }
-
         public static void WebHookSpammer(string Title, string Message, string webhook)
         {
             try
